@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Kaula Jakarta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #666;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23f8f9fa" width="1000" height="600"/><circle fill="%23333" cx="200" cy="150" r="50" opacity="0.1"/><circle fill="%23666" cx="800" cy="450" r="80" opacity="0.1"/></svg>');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #333, #666);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            font-weight: 300;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .about-image {
+            background: linear-gradient(45deg, #333, #666);
+            height: 300px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Menu Section */
+        .menu {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .menu-item p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(45deg, #333, #666);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .add-to-cart:hover {
+            transform: scale(1.05);
+        }
+
+        /* Location Section */
+        .location {
+            background: white;
+        }
+
+        .location-content {
+            text-align: center;
+        }
+
+        .location-info {
+            background: linear-gradient(135deg, #333, #666);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .location-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Cart */
+        .cart {
+            position: fixed;
+            top: 50%;
+            right: -300px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 15px 0 0 15px;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1001;
+            transform: translateY(-50%);
+        }
+
+        .cart.open {
+            right: 0;
+        }
+
+        .cart-header {
+            background: linear-gradient(45deg, #333, #666);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px 0 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-content {
+            padding: 1rem;
+            height: calc(100% - 120px);
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-total {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0 0 0 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .cart-toggle {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(45deg, #333, #666);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1002;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cart {
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Kauala.telUjkt</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#location">Location</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Kauala.telUjkt</h1>
+            <p>Nikmati cita rasa autentik di jantung Jakarta Selatan</p>
+            <a href="#menu" class="cta-button">Lihat Menu</a>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Kauala.telUjkt</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p> Lahir dari keresahan dan kegabutan mahasiswa semester akhir Telkom University Jakarta, cafe ini adalah bentuk perlawanan kecil terhadap riuhnya tugas, skripsi, dan rutinitas yang terus berulang.<p>
+
+                    <p >Kami merancang tempat ini sebagai ruang aman untuk berpikir, menulis, berdiam, atau sekadar bernapas. Di tengah kota yang tak pernah benar-benar diam, kami ingin menciptakan titik tenang tempat di mana suara mesin kopi lebih menenangkan dari notifikasi.<p>
+
+                    <p >Kami percaya, dari kegabutan bisa lahir sesuatu yang berarti.<p>
+
+                    <p>Selamat datang di kaula.telujkt tempat di mana kopi, ketenangan, dan sedikit keberanian bertemu.<p>
+
+
+                </div>
+                <div class="about-image">
+                    <div>
+                        <h3>kopi untuk skripsi.</h3>
+                        <p>Bahan terbaik untuk perasaan yang pelik.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Menu Kami</h2>
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section class="location" id="location">
+        <div class="container">
+            <h2 class="section-title">Lokasi Kami</h2>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>📍 Alamat</h3>
+                    <p>Jl. Taman Tangkuban Perahu No.8 2, RT.8/RW.2<br>
+                    Guntur, Kecamatan Setiabudi<br>
+                    Kota Jakarta Selatan<br>
+                    Daerah Khusus Ibukota Jakarta 12980</p>
+                </div>
+                <p>Kunjungi kami dan rasakan pengalaman coffee shop yang tak terlupakan di jantung Jakarta Selatan!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart -->
+    <button class="cart-toggle" onclick="toggleCart()">🛒</button>
+    <div class="cart" id="cart">
+        <div class="cart-header">
+            <h3>Pesanan Anda</h3>
+            <button onclick="toggleCart()" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">×</button>
+        </div>
+        <div class="cart-content" id="cartContent">
+            <p style="text-align: center; color: #666; margin-top: 2rem;">Keranjang kosong</p>
+        </div>
+        <div class="cart-total">
+            <div>Total: Rp <span id="cartTotal">0</span></div>
+            <button onclick="checkout()" style="background: linear-gradient(45deg, #333, #666); color: white; border: none; padding: 8px 16px; border-radius: 20px; margin-top: 10px; cursor: pointer;">Pesan Sekarang</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; Arjuna Asmara.2025 Kauala.telUjkt.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuItems = [
+            { name: "Matcha Latte", description: "Teh hijau Jepang premium + susu", price: "50.000 - 63.525", emoji: "🍵" },
+            { name: "Matcha Espresso Latte", description: "Campuran matcha dan espresso", price: "60.000", emoji: "☕" },
+            { name: "Ice White", description: "Kopi susu dingin, bisa pakai susu soya", price: "50.000 - 60.000", emoji: "🥛" },
+            { name: "Hot Hojicha Latte", description: "Teh hojicha Jepang panggang", price: "50.000", emoji: "🍵" },
+            { name: "Cascara Cola", description: "Teh cascara (kulit kopi) + soda", price: "64.000", emoji: "🥤" },
+            { name: "Homemade Lemonade", description: "Soda lemon segar buatan sendiri", price: "76.800", emoji: "🍋" },
+            { name: "Matcha Yuzu", description: "Matcha dengan citrus yuzu", price: "60.000", emoji: "🍃" },
+            { name: "Earl Grey Scone", description: "Scone rasa teh earl grey", price: "60.000", emoji: "🧁" },
+            { name: "Cascara Karaage", description: "Ayam goreng Jepang dengan cita rasa khas", price: "60.000", emoji: "🍗" },
+            { name: "Cheese Terrine", description: "Kue keju lembut ala Jepang", price: "60.000", emoji: "🧀" },
+            { name: "Matcha Financier", description: "Kue almond mini dengan saus matcha", price: "60.000", emoji: "🍰" }
+        ];
+
+        let cart = [];
+
+        function renderMenu() {
+            const menuGrid = document.getElementById('menuGrid');
+            menuGrid.innerHTML = menuItems.map(item => `
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        ${item.emoji}
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                        <div class="price">Rp ${item.price}</div>
+                        <button class="add-to-cart" onclick="addToCart('${item.name}', '${item.price}')">
+                            Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(name, price) {
+            const numericPrice = parseInt(price.replace(/[^\d]/g, ''));
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price: numericPrice, quantity: 1 });
+            }
+            
+            updateCart();
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartContent = document.getElementById('cartContent');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartContent.innerHTML = '<p style="text-align: center; color: #666; margin-top: 2rem;">Keranjang kosong</p>';
+                cartTotal.textContent = '0';
+                return;
+            }
+            
+            cartContent.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div>
+                        <div style="font-weight: 500;">${item.name}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Qty: ${item.quantity}</div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 500;">Rp ${item.price.toLocaleString()}</div>
+                        <button onclick="removeFromCart('${item.name}')" style="background: #666; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 0.7rem; cursor: pointer; margin-top: 5px;">×</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = total.toLocaleString();
+        }
+
+        function toggleCart() {
+            const cart = document.getElementById('cart');
+            cart.classList.toggle('open');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Keranjang kosong! Silakan pilih menu terlebih dahulu.');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const orderDetails = cart.map(item => `${item.name} x${item.quantity}`).join(', ');
+            
+            alert(`Terima kasih atas pesanan Anda!\n\nPesanan: ${orderDetails}\nTotal: Rp ${total.toLocaleString()}\n\nSilakan ke kasir untuk mengambil pesanan Anda.`);
+            
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize menu
+        renderMenu();
+    </script>
+</body>
+</html>
